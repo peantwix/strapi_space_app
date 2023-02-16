@@ -1,0 +1,25 @@
+version: '3'
+services:
+  intergalactic-tavel-co:
+    container_name: intergalactic-tavel-co
+    build:
+      context: .
+      dockerfile: .Dockerfile
+    depends_on:
+      - galactic-postgres
+    ports:
+      - '3000:3000'
+  galactic-postgres:
+    container_name: galactic-postgres
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: azerty
+      POSTGRES_DB: strapi_assessment_db
+volumes:
+  db-data:
